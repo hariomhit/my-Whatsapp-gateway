@@ -26,6 +26,9 @@ export class ChatSummaryDto {
   @ApiPropertyOptional({ example: 'hi' })
   lastMessage?: string;
 
+  @ApiPropertyOptional({ description: 'Whether the last message contains an image.', example: false })
+  isImage?: boolean;
+
   @ApiProperty({ description: 'Archived state, as set via POST /sessions/{sessionId}/chats/archive.', example: false })
   archived!: boolean;
 
