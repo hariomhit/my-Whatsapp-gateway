@@ -62,7 +62,7 @@
     "migration:generate:main": "npm run typeorm -- migration:generate src/database/migrations-main/$npm_config_name -d src/database/data-source-main.ts",
     "migration:run:main": "npm run typeorm -- migration:run -d src/database/data-source-main.ts",
     "migration:run:main:prod": "npm run typeorm:prod -- migration:run -d dist/database/data-source-main.js",
-    "migration:revert:main": "npm run typeorm -- migration:revert -d src/database/data-source-main.ts",
+    "migration:revert:main": "npm run typeorm:revert -- migration:revert -d src/database/data-source-main.ts",
     "migration:revert:main:prod": "npm run typeorm:prod -- migration:revert -d dist/database/data-source-main.js",
     "migration:show:main": "npm run typeorm -- migration:show -d src/database/data-source-main.ts",
     "migration:show:main:prod": "npm run typeorm:prod -- migration:show -d dist/database/data-source-main.js"
@@ -135,20 +135,21 @@
     "jest": "^30.5.1",
     "prettier": "^3.9.8",
     "supertest": "^7.0.0",
-    "ts-jest": "^29.4.12",
+    "ts-jest": "^29.4.14",
     "ts-node": "^10.9.2",
     "tsconfig-paths": "^4.2.0",
     "typescript": "~6.0.3",
     "typescript-eslint": "^8.70.0"
   },
   "jest": {
+    "preset": "ts-jest",
     "moduleFileExtensions": [
       "js",
       "json",
       "ts"
     ],
-    "rootDir": "src",
-    "testRegex": ".*\\.spec\\.ts$",
+    "rootDir": "./",
+    "testRegex": "src/.*\\.spec\\.ts$",
     "testPathIgnorePatterns": [
       "src/common/changelog-sections\\.spec\\.ts$",
       "src/common/ci-privilege-gate\\.spec\\.ts$",
@@ -180,31 +181,18 @@
       "/node_modules/",
       "src/database/migrations/__tests__/migration-drift\\.spec\\.ts$"
     ],
-    "transform": {
-      "^.+\\.(t|j)s$": [
-        "ts-jest",
-        {
-          "tsconfig": {
-            "module": "CommonJS",
-            "moduleResolution": "node",
-            "resolvePackageJsonExports": false,
-            "ignoreDeprecations": "6.0"
-          }
-        }
-      ]
-    },
     "moduleNameMapper": {
-      "^@whiskeysockets/baileys$": "<rootDir>/../test/__mocks__/@whiskeysockets/baileys.ts",
-      "^@whiskeysockets/baileys/(.*)$": "<rootDir>/../test/__mocks__/@whiskeysockets/baileys.ts",
-      "^archiver$": "<rootDir>/../test/__mocks__/archiver.ts",
-      "^https-proxy-agent$": "<rootDir>/../test/__mocks__/https-proxy-agent.ts",
-      "^puppeteer$": "<rootDir>/../test/__mocks__/puppeteer.ts",
-      "^socks-proxy-agent$": "<rootDir>/../test/__mocks__/socks-proxy-agent.ts"
+      "^@whiskeysockets/baileys$": "<rootDir>/test/__mocks__/@whiskeysockets/baileys.ts",
+      "^@whiskeysockets/baileys/(.*)$": "<rootDir>/test/__mocks__/@whiskeysockets/baileys.ts",
+      "^archiver$": "<rootDir>/test/__mocks__/archiver.ts",
+      "^https-proxy-agent$": "<rootDir>/test/__mocks__/https-proxy-agent.ts",
+      "^puppeteer$": "<rootDir>/test/__mocks__/puppeteer.ts",
+      "^socks-proxy-agent$": "<rootDir>/test/__mocks__/socks-proxy-agent.ts"
     },
     "collectCoverageFrom": [
-      "**/*.(t|j)s"
+      "src/**/*.(t|j)s"
     ],
-    "coverageDirectory": "../coverage",
+    "coverageDirectory": "./coverage",
     "coverageThreshold": {
       "global": {
         "branches": 54,
