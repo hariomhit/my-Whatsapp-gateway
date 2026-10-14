@@ -15,7 +15,7 @@
 # security-scan.yml fails once the pin differs from what the tag serves and either the tag has
 # served that image for 7 or more days, or for 3 or more days with the pin last changed 28 or more
 # days ago. Update both stages together.
-FROM --platform=$BUILDPLATFORM docker.io/node:22-slim@sha256:43ac6c60b8f89723f746e8a92ce91abd5017e627ce1ddfe4238355d3a30b772c AS builder
+FROM --platform=$BUILDPLATFORM docker.io/node:22-slim@sha256:c3de60bf2f9dd0ac6370e6117950ff62d6e339527e7472301c9c78a017978392 AS builder
 
 WORKDIR /app
 
@@ -63,7 +63,7 @@ RUN npm run build && npm run dashboard:ci -- --include=dev && npm run dashboard:
 
 # ===== Stage 2: Production =====
 # Same digest-pinned node:22-slim base as the builder stage.
-FROM docker.io/node:22-slim@sha256:43ac6c60b8f89723f746e8a92ce91abd5017e627ce1ddfe4238355d3a30b772c AS production
+FROM docker.io/node:22-slim@sha256:c3de60bf2f9dd0ac6370e6117950ff62d6e339527e7472301c9c78a017978392 AS production
 
 # Run the app with production defaults from the first boot: an unset NODE_ENV selects the
 # development branch of the CORS/Swagger/DTO-error-detail/default-secret hardening (main.ts
